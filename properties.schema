@@ -62,7 +62,7 @@
        "_autoplay": {
           "type": "boolean",
           "required":false,
-          "default": "false",
+          "default": false,
           "title": "Autoplay",
           "inputType": "Checkbox",
           "validators": [],
@@ -71,7 +71,7 @@
        "_loop": {
           "type": "boolean",
           "required":false,
-          "default": "false",
+          "default": false,
           "title": "Loop",
           "inputType": "Checkbox",
           "validators": [],
