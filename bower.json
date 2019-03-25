@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "framework": ">=3.3.0",
   "displayName": "Vimeo Player",
-  "component": "viemo",
+  "component": "vimeo",
   "description": "Vimeo Player for Adapt",
   "repository": {
     "type": "git",

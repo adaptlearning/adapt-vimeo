@@ -14,6 +14,10 @@ define([
     });
 
     var Vimeo = ComponentView.extend({
+        events: {
+            "click .js-skip-to-transcript": "onSkipToTranscript"
+        },
+
         postRender: function() {
             this.$widget = this.$('.vimeo-widget');
             this.setupPlayer();
@@ -73,6 +77,10 @@ define([
             var view = new constructor({ model: model});
             this.$widget.append(view.$el);
             return view;
+        },
+
+        onSkipToTranscript: function() {
+            this.$('.media-transcript-container button').a11y_focus();
         },
 
         /**
