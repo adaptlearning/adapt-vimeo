@@ -58,9 +58,9 @@ guide the learner’s interaction with the component.
 
 ### Limitations
 
-Some browsers block autoplay altogether, others block autoplay on untrusted sites. The autoplay option should not be relied upon.
+No known limitations
 
 ----------------------------
 **Version number:**  1.0.0
-**Framework versions:**  >=3.0.0
+**Framework versions:**  2.0
 **Author / maintainer:** Dan Storey

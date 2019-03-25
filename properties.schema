@@ -11,10 +11,10 @@
       "inputType": "Text",
       "validators": []
     },
-    "transcriptButton": {
+    "skipToTranscript ": {
       "type": "string",
       "required": false,
-      "default": "Alternatively you can select the link below for the transcript.",
+      "default": "Skip to transcript",
       "inputType": "Text",
       "validators": []
     }
@@ -33,13 +33,13 @@
       "default": "",
       "inputType": "Text",
       "validators": [],
-      "help": "This is the instruction text"
+      "help": ""
     },
     "_setCompletionOn": {
       "type": "string",
       "required": true,
       "enum": ["inview", "play", "ended"],
-      "default": "inview",
+      "default": "play",
       "title": "Set completion of Video on",
       "inputType": {"type": "Select", "options":["inview", "play", "ended"]},
       "validators": ["required"],
@@ -61,7 +61,7 @@
         },
        "_autoplay": {
           "type": "boolean",
-          "required":false,
+          "required": false,
           "default": false,
           "title": "Autoplay",
           "inputType": "Checkbox",
@@ -70,7 +70,7 @@
         },
        "_loop": {
           "type": "boolean",
-          "required":false,
+          "required": false,
           "default": false,
           "title": "Loop",
           "inputType": "Checkbox",
