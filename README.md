@@ -28,7 +28,7 @@ guide the learner’s interaction with the component.
 
 **_media** (object): The media configuration, containing values for **_source**, **_autoplay** and **_loop**
 
->**__source** (string): The URL of the Vimeo video. This can be a direct link or an embed link
+>**_source** (string): The URL of the Vimeo video. This can be a direct link or an embed link
 
 >**_autoplay** (boolean): Attempt to autoplay the view. Not supported in all browsers
 
