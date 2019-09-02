@@ -1,0 +1,26 @@
+<div class="media-transcript-button-container">
+    {{#if _inlineTranscript}}
+        <button class="media-inline-transcript-button button" aria-expanded="false">
+            <div class="transcript-text-container">{{inlineTranscriptButton}}</div>
+        </button>
+    {{/if}}
+    {{#if _externalTranscript}}
+        <button onclick="top.window.open('{{transcriptLink}}')" class="media-external-transcript-button button" role="link">
+            <div class="transcript-text-container">
+                {{#if transcriptLinkButton}}
+                    {{transcriptLinkButton}}
+                {{else}}
+                    {{transcriptLink}}
+                {{/if}}
+            </div>
+        </button>
+    {{/if}}
+</div>
+
+{{#if _inlineTranscript}}
+    <div class="media-inline-transcript-body-container" role="region" aria-label="{{inlineTranscriptButton}}">
+        <div class="media-inline-transcript-body">
+            {{{compile inlineTranscriptBody}}}
+        </div>
+    </div>
+{{/if}}
