@@ -1,22 +1,23 @@
 {
   "name": "adapt-vimeo",
-  "version": "1.0.0",
-  "framework": ">=3.3.0",
-  "displayName": "Vimeo Player",
-  "component": "vimeo",
-  "description": "Vimeo Player for Adapt",
   "repository": {
     "type": "git",
     "url": "git://github.com/adaptlearning/adapt-vimeo.git"
   },
+  "version": "2.0.0",
+  "framework": ">=5",
   "homepage": "https://github.com/adaptlearning/adapt-vimeo",
+  "issues": "https://github.com/adaptlearning/adapt-vimeo/issues/new",
+  "component": "vimeo",
+  "displayName": "Vimeo Player",
+  "description": "Vimeo Player for Adapt",
   "main": "/js/adapt-vimeo.js",
-  "authors": [
-    "Dan Storey <danielstorey@gmail.com>"
-  ],
   "keywords": [
     "adapt-plugin",
     "adapt-component"
   ],
-  "license": "GPLv3"
+  "authors": [
+    "Dan Storey <danielstorey@gmail.com>"
+  ],
+  "license": "GPL-3.0"
 }
