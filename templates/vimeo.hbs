@@ -1,10 +1,12 @@
-<div class="component-inner vimeo-inner">
+{{import_globals}}
+<div class="component__inner vimeo__inner">
+
   {{> component this}}
 
   {{#any _transcript._externalTranscript _transcript._inlineTranscript}}
-    <button class="aria-label js-skip-to-transcript" aria-label="{{_globals._components._vimeo.skipToTranscript}}">SKIP</button>
+  <button class="aria-label js-skip-to-transcript" tabindex="-1" aria-label="{{_globals._components._vimeo.skipToTranscript}}"></button>
   {{/any}}
 
-  <div class="component-widget vimeo-widget"></div>
+  <div class="component__widget vimeo__widget"></div>
 
 </div>

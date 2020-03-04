@@ -20,7 +20,7 @@ define([
     },
 
     postRender: function() {
-      this.$widget = this.$('.vimeo-widget');
+      this.$widget = this.$('.component__widget');
       this.setupPlayer();
       this.setupTranscript();
       this.setupEventListeners();
@@ -62,7 +62,7 @@ define([
       var completionEvent = COMPLETION(this.model.get('_setCompletionOn')) || COMPLETION.PLAY;
 
       if (completionEvent === COMPLETION.INVIEW) {
-        return this.setupInviewCompletion('.component-widget', this.setCompletionStatus);
+        return this.setupInviewCompletion('.component__widget', this.setCompletionStatus);
       }
 
       this.listenToOnce(this.vimeoView, completionEvent.asLowerCase, this.setCompletionStatus);
@@ -81,7 +81,7 @@ define([
     },
 
     onSkipToTranscript: function() {
-      this.$('.media-transcript-container button').a11y_focus();
+      this.$('.vimeo__transcript-btn').a11y_focus();
     },
 
     /**

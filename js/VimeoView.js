@@ -17,7 +17,7 @@ define([
       'loaded'
     ],
 
-    className: 'vimeo-video',
+    className: 'vimeo__video',
 
     initialize: function() {
       this.setupPlayer();

@@ -8,11 +8,11 @@ define([
 
     template: 'vimeoTranscript',
 
-    className: 'media-transcript-container',
+    className: 'vimeo__transcript-container',
 
     events: {
-      'click .media-inline-transcript-button': 'onToggleInlineTranscript',
-      'click .media-external-transcript-button': 'onExternalTranscriptClicked',
+      'click .js-vimeo-inline-transcript-toggle': 'onToggleInlineTranscript',
+      'click .js-vimeo-external-transcript-click': 'onExternalTranscriptClicked',
       'click .js-skip-to-transcript': 'onSkipToTranscript'
     },
 
@@ -26,7 +26,7 @@ define([
     },
 
     onSkipToTranscript: function() {
-      this.$('.media-transcript-container button').a11y_focus();
+      this.$('.vimeo__transcript-btn').a11y_focus();
     },
 
     /**
@@ -36,9 +36,9 @@ define([
     onToggleInlineTranscript: function(event) {
       event && event.preventDefault();
 
-      var $transcriptBodyContainer = this.$('.media-inline-transcript-body-container');
-      var $button = this.$('.media-inline-transcript-button');
-      var $buttonText = this.$('.media-inline-transcript-button .transcript-text-container');
+      var $transcriptBodyContainer = this.$('.vimeo__transcript-body-inline');
+      var $button = this.$('.vimeo__transcript-btn-inline');
+      var $buttonText = this.$('.youtube__transcript-btn-text');
       var slide = 'slideDown';
       var text = this.model.inlineTranscriptCloseButton;
 
