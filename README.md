@@ -61,6 +61,6 @@ guide the learner’s interaction with the component.
 No known limitations
 
 ----------------------------
-**Version number:**  1.0.0
-**Framework versions:**  2.0
-**Author / maintainer:** Dan Storey
+**Version number:**  2.0.0  
+**Framework versions:** 5+  
+**Author / maintainer:** Dan Storey  
