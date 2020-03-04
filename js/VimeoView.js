@@ -1,86 +1,88 @@
 define([
-    'libraries/vimeo-player-2.8.0.min'
+  'libraries/vimeo-player-2.8.0.min'
 ], function(Player) {
-    return Backbone.View.extend({
 
-        template: 'vimeoVideo',
+  return Backbone.View.extend({
 
-        vimeoEvents: [
-            'play',
-            'pause',
-            'ended',
-            'timeupdate',
-            'seeking',
-            'seeked',
-            'error',
-            'loaded'
-        ],
+    template: 'vimeoVideo',
 
-        className: 'vimeo-video',
+    vimeoEvents: [
+      'play',
+      'pause',
+      'ended',
+      'timeupdate',
+      'seeking',
+      'seeked',
+      'error',
+      'loaded'
+    ],
 
-        initialize: function() {
-            this.setupPlayer();
-            this.setupResponsiveSizing();
-            this.setupEventListeners();
-        },
+    className: 'vimeo-video',
 
-        /**
-         * Instantiate the vimeo player with the options supplied
-         */
-        setupPlayer: function() {
-            var options = {
-                url: this.model._source,
-                autoplay: this.model._autoplay,
-                loop: this.model._loop
-            };
+    initialize: function() {
+      this.setupPlayer();
+      this.setupResponsiveSizing();
+      this.setupEventListeners();
+    },
 
-            this.player = new Player(this.el, options);
-        },
+    /**
+     * Instantiate the vimeo player with the options supplied
+     */
+    setupPlayer: function() {
+      var options = {
+        url: this.model._source,
+        autoplay: this.model._autoplay,
+        loop: this.model._loop
+      };
 
-        /**
-         * Use the vimeo player's methods to determine the aspect ratio,
-         * and set the padding on this view's element accordingly
-         */
-        setupResponsiveSizing: function() {
-            var $el = this.$el;
-            var player = this.player;
-            var self = this;
+      this.player = new Player(this.el, options);
+    },
 
-            player
-                .getVideoWidth()
-                .then(function(width) {
-                    self.videoWidth = width;
-                    return player.getVideoHeight();
-                })
-                .then(function(height) {
-                    self.videoHeight = height;
-                    var ratio = self.videoHeight / self.videoWidth * 100;
-                    $el.css({ paddingTop: ratio + '%' });
-                    self.trigger('ready');
-                });
-        },
+    /**
+     * Use the vimeo player's methods to determine the aspect ratio,
+     * and set the padding on this view's element accordingly
+     */
+    setupResponsiveSizing: function() {
+      var $el = this.$el;
+      var player = this.player;
+      var self = this;
 
-        /**
-         * Trigger the vimeo player's events on this view so that it can act as an abstraction of the player
-         */
-        setupEventListeners: function() {
-            this.vimeoEvents.forEach(function(eventType) {
-                this.player.on(eventType, function(data) {
-                    this.trigger(eventType, {
-                        type: eventType,
-                        data: data
-                    });
-                }.bind(this))
-            }, this);
-        },
+      player
+        .getVideoWidth()
+        .then(function(width) {
+          self.videoWidth = width;
+          return player.getVideoHeight();
+        })
+        .then(function(height) {
+          self.videoHeight = height;
+          var ratio = self.videoHeight / self.videoWidth * 100;
+          $el.css({ paddingTop: ratio + '%' });
+          self.trigger('ready');
+        });
+    },
 
-        /**
-         * Destroy the player instance before removal
-         */
-        remove: function() {
-            this.player.destroy();
-            Backbone.View.prototype.remove.call(this);
-        }
+    /**
+     * Trigger the vimeo player's events on this view so that it can act as an abstraction of the player
+     */
+    setupEventListeners: function() {
+      this.vimeoEvents.forEach(function(eventType) {
+        this.player.on(eventType, function(data) {
+          this.trigger(eventType, {
+            type: eventType,
+            data: data
+          });
+        }.bind(this))
+      }, this);
+    },
 
-    });
+    /**
+     * Destroy the player instance before removal
+     */
+    remove: function() {
+      this.player.destroy();
+      Backbone.View.prototype.remove.call(this);
+    }
+
+  });
+
 });

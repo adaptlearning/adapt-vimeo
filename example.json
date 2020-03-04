@@ -1,21 +1,21 @@
-{
-    "_id": "c-35",
-    "_parentId": "b-20",
-    "_type": "component",
-    "_classes": "",
-    "_layout": "full",
-    "_component": "vimeo",
-    "title": "Component Title",
-    "displayTitle": "Component Title",
-    "body": "This is a vimeo component",
-    "instruction": "Click the button to play",
-    "_setCompletionOn": "play",
-    "_media": {
-        "_source": "//vimeo.com/319977833",
-        "_autoplay": false,
-        "_loop": false
-    },
-    "_pageLevelProgress": {
-        "_isEnabled": true
+    {
+        "_id": "c-35",
+        "_parentId": "b-20",
+        "_type": "component",
+        "_classes": "",
+        "_layout": "full",
+        "_component": "vimeo",
+        "title": "Component Title",
+        "displayTitle": "Component Title",
+        "body": "This is a vimeo component",
+        "instruction": "Click the button to play",
+        "_setCompletionOn": "play",
+        "_media": {
+            "_source": "//vimeo.com/319977833",
+            "_autoplay": false,
+            "_loop": false
+        },
+        "_pageLevelProgress": {
+            "_isEnabled": true
+        }
     }
-}

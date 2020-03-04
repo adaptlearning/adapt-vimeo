@@ -1,69 +1,71 @@
 define([
-    'core/js/adapt'
+  'core/js/adapt'
 ], function(Adapt) {
-    return Backbone.View.extend({
 
-        isOpen: false,
+  return Backbone.View.extend({
 
-        template: 'vimeoTranscript',
+    isOpen: false,
 
-        className: 'media-transcript-container',
+    template: 'vimeoTranscript',
 
-        events: {
-            'click .media-inline-transcript-button': 'onToggleInlineTranscript',
-            'click .media-external-transcript-button': 'onExternalTranscriptClicked',
-            'click .js-skip-to-transcript': 'onSkipToTranscript'
-        },
+    className: 'media-transcript-container',
 
-        initialize: function() {
-            this.render();
-        },
+    events: {
+      'click .media-inline-transcript-button': 'onToggleInlineTranscript',
+      'click .media-external-transcript-button': 'onExternalTranscriptClicked',
+      'click .js-skip-to-transcript': 'onSkipToTranscript'
+    },
 
-        render: function() {
-            var template = Handlebars.templates[this.template];
-            this.$el.html(template(this.model));
-        },
+    initialize: function() {
+      this.render();
+    },
 
-        onSkipToTranscript: function() {
-            this.$('.media-transcript-container button').a11y_focus();
-        },
+    render: function() {
+      var template = Handlebars.templates[this.template];
+      this.$el.html(template(this.model));
+    },
 
-        /**
-         * Toggle opening and closing the transcript
-         * @param {Event} event
-         */
-        onToggleInlineTranscript: function(event) {
-            event && event.preventDefault();
+    onSkipToTranscript: function() {
+      this.$('.media-transcript-container button').a11y_focus();
+    },
 
-            var $transcriptBodyContainer = this.$('.media-inline-transcript-body-container');
-            var $button = this.$('.media-inline-transcript-button');
-            var $buttonText = this.$('.media-inline-transcript-button .transcript-text-container');
-            var slide = 'slideDown';
-            var text = this.model.inlineTranscriptCloseButton;
+    /**
+     * Toggle opening and closing the transcript
+     * @param {Event} event
+     */
+    onToggleInlineTranscript: function(event) {
+      event && event.preventDefault();
 
-            this.isOpen = !this.isOpen;
+      var $transcriptBodyContainer = this.$('.media-inline-transcript-body-container');
+      var $button = this.$('.media-inline-transcript-button');
+      var $buttonText = this.$('.media-inline-transcript-button .transcript-text-container');
+      var slide = 'slideDown';
+      var text = this.model.inlineTranscriptCloseButton;
 
-            if (!this.isOpen) {
-                slide = 'slideUp';
-                text = this.model.inlineTranscriptButton
-            }
+      this.isOpen = !this.isOpen;
 
-            $transcriptBodyContainer.stop(true, true)[slide](function() {
-                Adapt.trigger('device:resize');
-            });
-            $button.attr('aria-expanded', this.isOpen);
-            $buttonText.html(text);
+      if (!this.isOpen) {
+        slide = 'slideUp';
+        text = this.model.inlineTranscriptButton
+      }
 
+      $transcriptBodyContainer.stop(true, true)[slide](function() {
+        Adapt.trigger('device:resize');
+      });
+      $button.attr('aria-expanded', this.isOpen);
+      $buttonText.html(text);
 
-            this.trigger('transcript:open');
-        },
+      this.trigger('transcript:open');
+    },
 
-        /**
-         * Trigger the 'transcript:open' event when the external transcript button is clicked
-         * @param event
-         */
-        onExternalTranscriptClicked: function(event) {
-            this.trigger('transcript:open');
-        }
-    });
+    /**
+     * Trigger the 'transcript:open' event when the external transcript button is clicked
+     * @param event
+     */
+    onExternalTranscriptClicked: function(event) {
+      this.trigger('transcript:open');
+    }
+
+  });
+
 });
