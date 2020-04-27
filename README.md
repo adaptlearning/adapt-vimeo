@@ -8,7 +8,7 @@ TBC
 
 ## Settings Overview
 
-The attributes listed below are used in *components.json* to configure **Adapt Vimeo Player**, and are properly formatted as JSON in [*example.json*](https://github.com/adaptlearning/adapt-contrib-vimeo/example.json).
+The attributes listed below are used in *components.json* to configure **Adapt Vimeo Player**, and are properly formatted as JSON in [*example.json*](https://github.com/adaptlearning/adapt-vimeo/example.json).
 
 ### Attributes
 
@@ -61,6 +61,6 @@ guide the learner’s interaction with the component.
 No known limitations
 
 ----------------------------
-**Version number:**  1.0.0
-**Framework versions:**  2.0
-**Author / maintainer:** Dan Storey
+**Version number:** 2.0.0  
+**Framework versions:** 5+  
+**Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-vimeo/graphs/contributors)  

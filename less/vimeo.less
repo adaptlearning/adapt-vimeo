@@ -1,41 +1,50 @@
-.vimeo-video {
-  position: relative;
+.vimeo {
+  &__video {
+    position: relative;
+  }
 
-  iframe {
+  &__video iframe {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%
+    height: 100%;
+  }
+
+  &__transcript-body-inline {
+    display: none;
   }
 }
 
-.media-transcript {
-  padding: @button-padding;
-  display: block;
-  color: @button-text-color;
-  background-color: @button-color;
-  text-decoration: none;
-  &:hover {
-    color: @button-text-color-hover;
-    background-color: @button-color-hover;
+// --------------------------------------------------
+// --------------------------------------------------
+// THEME
+// --------------------------------------------------
+// --------------------------------------------------
+.vimeo {
+  &__transcript-container {
+    margin-top: @item-margin;
   }
-}
 
-.media-inline-transcript-body-container {
-  margin-top: 10px;
-  display: none;
-}
+  &__transcript-btn {
+    padding: @item-padding;
+    background-color: @item-color;
+    color: @item-color-inverted;
+    border-radius: @item-border-radius;
 
-.media-inline-transcript-body {
-  padding: @component-padding;
-}
+    .no-touch &:hover {
+      background-color: @item-color-hover;
+      color: @item-color-inverted-hover;
+      .transition(background-color @duration ease-in, color @duration ease-in;);
+    }
+  }
 
-.media-transcript-button-container {
-  padding:1px;
-}
+  &__transcript-body-inline {
+    margin-top: @item-margin;
+    padding: @item-padding;
+  }
 
-.media-external-transcript-button, .media-inline-transcript-button {
-  width:100%;
-  display:block;
+  &__transcript-body-inline a {
+    .link-text;
+  }
 }
