@@ -25,12 +25,10 @@ define([
     },
 
     /**
-     * Toggle opening and closing the transcript
-     * @param {Event} event
+     * Handles toggling the inline transcript open/closed
+     * and updating the label on the inline transcript button
      */
-    onToggleInlineTranscript: function(event) {
-      event && event.preventDefault();
-
+    onToggleInlineTranscript: function() {
       var $transcriptBodyContainer = this.$('.vimeo__transcript-body-inline');
       var $button = this.$('.vimeo__transcript-btn-inline');
       var $buttonText = $button.find('.vimeo__transcript-btn-text');
