@@ -27,6 +27,7 @@
             "transcriptLink": "assets/transcript.pdf"
         },
         "_pageLevelProgress": {
-            "_isEnabled": true
+            "_isEnabled": true,
+            "_isCompletionIndicatorEnabled": true
         }
     }
