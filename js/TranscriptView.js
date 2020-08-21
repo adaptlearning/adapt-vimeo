@@ -38,7 +38,7 @@ define([
 
       var $transcriptBodyContainer = this.$('.vimeo__transcript-body-inline');
       var $button = this.$('.vimeo__transcript-btn-inline');
-      var $buttonText = this.$('.youtube__transcript-btn-text');
+      var $buttonText = this.$('.vimeo__transcript-btn-text');
       var slide = 'slideDown';
       var text = this.model.inlineTranscriptCloseButton;
 
