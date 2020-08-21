@@ -26,13 +26,15 @@ guide the learner’s interaction with the component.
 **_setCompletionOn** (string): This determines when Adapt will register this component as having been completed by the user. Acceptable values are `inview` (triggered when the component is fully displayed within the viewport), `play` (triggered when playback is initiated), or `ended` (triggered when the video has reached the end of playback). 
 
 
-**_media** (object): The media configuration, containing values for **_source**, **_autoplay** and **_loop**
+**_media** (object): The media configuration, containing values for **_source**, **_autoplay**, **_loop** and **_pauseWhenOffScreen**
 
 >**_source** (string): The URL of the Vimeo video. This can be a direct link or an embed link
 
 >**_autoplay** (boolean): Attempt to autoplay the view. Not supported in all browsers
 
 >**_loop** (boolean): Automatically restart the video when it reaches the end
+
+>**_pauseWhenOffScreen** (boolean): If set to `true`, pause playback when video is no longer in view. The default is `false`.
 
 
 **_transcript** (object):  The transcript attributes group contains values for **_inlineTranscript**, **_externalTranscript**, **inlineTranscriptButton**, **inlineTranscriptCloseButton**, **inlineTranscriptBody**, **transcriptLinkButton**, and **transcriptLink**.

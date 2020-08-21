@@ -76,6 +76,14 @@
           "inputType": "Checkbox",
           "validators": [],
           "help": "Whether to play the video on a loop or not."
+        },
+        "_pauseWhenOffScreen": {
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "title": "Pause playback when video is no longer in view.",
+          "inputType": "Checkbox",
+          "validators": []
         }
       }
     },
