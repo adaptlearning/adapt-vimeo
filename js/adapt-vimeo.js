@@ -1,9 +1,10 @@
 define([
   'core/js/adapt',
   'core/js/views/componentView',
+  'core/js/models/componentModel',
   './VimeoView',
   './TranscriptView'
-], function(Adapt, ComponentView, VimeoView, TranscriptView) {
+], function(Adapt, ComponentView, ComponentModel, VimeoView, TranscriptView) {
 
   var COMPLETION = ENUM([
     'INVIEW',
@@ -137,6 +138,9 @@ define([
 
   });
 
-  return Adapt.register('vimeo', Vimeo);
+  return Adapt.register('vimeo', {
+    model: ComponentModel.extend({}), // create a new class in the inheritance chain so it can be extended per component type if necessary later
+    view: Vimeo
+  });
 
 });
