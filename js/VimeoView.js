@@ -1,5 +1,5 @@
 define([
-  'libraries/player.min'
+  'libraries/vimeo-player.min'
 ], function(Player) {
 
   return Backbone.View.extend({
