@@ -82,7 +82,7 @@ define([
     },
 
     onSkipToTranscript: function() {
-      this.$('.vimeo__transcript-btn').a11y_focus();
+      Adapt.a11y.focusFirst(this.$('.vimeo__transcript-btn'));
     },
 
     /**

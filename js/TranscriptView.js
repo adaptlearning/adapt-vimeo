@@ -12,8 +12,7 @@ define([
 
     events: {
       'click .js-vimeo-inline-transcript-toggle': 'onToggleInlineTranscript',
-      'click .js-vimeo-external-transcript-click': 'onExternalTranscriptClicked',
-      'click .js-skip-to-transcript': 'onSkipToTranscript'
+      'click .js-vimeo-external-transcript-click': 'onExternalTranscriptClicked'
     },
 
     initialize: function() {
@@ -23,10 +22,6 @@ define([
     render: function() {
       var template = Handlebars.templates[this.template];
       this.$el.html(template(this.model));
-    },
-
-    onSkipToTranscript: function() {
-      this.$('.vimeo__transcript-btn').a11y_focus();
     },
 
     /**
