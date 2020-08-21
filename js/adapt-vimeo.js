@@ -17,7 +17,7 @@ define([
   var Vimeo = ComponentView.extend({
 
     events: {
-      "click .js-skip-to-transcript": "onSkipToTranscript"
+      'click .js-skip-to-transcript': 'onSkipToTranscript'
     },
 
     postRender: function() {
@@ -76,7 +76,7 @@ define([
      * @returns {Backbone.View}
      */
     addSubview: function(constructor, model) {
-      var view = new constructor({ model: model});
+      var view = new constructor({ model: model });
       this.$widget.append(view.$el);
       return view;
     },

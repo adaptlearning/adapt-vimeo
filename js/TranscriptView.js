@@ -46,7 +46,7 @@ define([
 
       if (!this.isOpen) {
         slide = 'slideUp';
-        text = this.model.inlineTranscriptButton
+        text = this.model.inlineTranscriptButton;
       }
 
       $transcriptBodyContainer.stop(true, true)[slide](function() {
