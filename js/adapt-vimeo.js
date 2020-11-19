@@ -1,9 +1,10 @@
 define([
   'core/js/adapt',
   'core/js/views/componentView',
+  'core/js/models/componentModel',
   './VimeoView',
   './TranscriptView'
-], function(Adapt, ComponentView, VimeoView, TranscriptView) {
+], function(Adapt, ComponentView, ComponentModel, VimeoView, TranscriptView) {
 
   var COMPLETION = ENUM([
     'INVIEW',
@@ -16,7 +17,7 @@ define([
   var Vimeo = ComponentView.extend({
 
     events: {
-      "click .js-skip-to-transcript": "onSkipToTranscript"
+      'click .js-skip-to-transcript': 'onSkipToTranscript'
     },
 
     postRender: function() {
@@ -75,13 +76,13 @@ define([
      * @returns {Backbone.View}
      */
     addSubview: function(constructor, model) {
-      var view = new constructor({ model: model});
+      var view = new constructor({ model: model });
       this.$widget.append(view.$el);
       return view;
     },
 
     onSkipToTranscript: function() {
-      this.$('.vimeo__transcript-btn').a11y_focus();
+      Adapt.a11y.focusFirst(this.$('.vimeo__transcript-btn'));
     },
 
     /**
@@ -137,6 +138,9 @@ define([
 
   });
 
-  return Adapt.register('vimeo', Vimeo);
+  return Adapt.register('vimeo', {
+    model: ComponentModel.extend({}), // create a new class in the inheritance chain so it can be extended per component type if necessary later
+    view: Vimeo
+  });
 
 });

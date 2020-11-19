@@ -1,5 +1,5 @@
 define([
-  'libraries/player.min'
+  'libraries/vimeo-player.min'
 ], function(Player) {
 
   return Backbone.View.extend({
@@ -63,6 +63,7 @@ define([
 
     /**
      * Trigger the vimeo player's events on this view so that it can act as an abstraction of the player
+     * also set up inview listener for 'pause when offscreen', if that's been enabled
      */
     setupEventListeners: function() {
       this.vimeoEvents.forEach(function(eventType) {
@@ -71,14 +72,27 @@ define([
             type: eventType,
             data: data
           });
-        }.bind(this))
+        }.bind(this));
       }, this);
+
+      if (!this.model._pauseWhenOffScreen) return;
+
+      this.$el.on('inview.pauseWhenOffScreen', this.onPlayerInview.bind(this));
+    },
+
+    onPlayerInview: function(event, isInView) {
+      if (isInView) return;
+      this.player.getPaused().then(function(paused) {
+        if (paused) return;
+        this.player.pause();
+      }.bind(this));
     },
 
     /**
      * Destroy the player instance before removal
      */
     remove: function() {
+      if (this.model._pauseWhenOffScreen) this.$el.off('inview.pauseWhenOffScreen');
       this.player.destroy();
       Backbone.View.prototype.remove.call(this);
     }
