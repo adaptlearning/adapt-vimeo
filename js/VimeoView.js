@@ -94,7 +94,11 @@ define([
     remove: function() {
       if (this.model._pauseWhenOffScreen) this.$el.off('inview.pauseWhenOffScreen');
 
-      if (this.player._originalElement) this.player.destroy();
+      try {
+        this.player.destroy();
+      } catch(e) {
+        console.log(e)
+      }
 
       Backbone.View.prototype.remove.call(this);
     }
