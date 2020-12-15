@@ -63,6 +63,6 @@ guide the learner’s interaction with the component.
 No known limitations
 
 ----------------------------
-**Version number:** 2.1.0  
+**Version number:** 2.1.1  
 **Framework versions:** 5+  
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-vimeo/graphs/contributors)  

@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git://github.com/adaptlearning/adapt-vimeo.git"
   },
-  "version": "2.1.0",
+  "version": "2.1.1",
   "framework": ">=5",
   "homepage": "https://github.com/adaptlearning/adapt-vimeo",
   "issues": "https://github.com/adaptlearning/adapt-vimeo/issues/new",
