@@ -50,9 +50,8 @@ class Vimeo extends ComponentView {
 
     this.transcriptView = this.addSubview(TranscriptView, transcriptConfig);
 
-    if (transcriptConfig._setCompletionOnView) {
-      this.listenToOnce(this.transcriptView, 'transcript:open', this.setCompletionStatus);
-    }
+    if (!transcriptConfig._setCompletionOnView) return;
+    this.listenToOnce(this.transcriptView, 'transcript:open', this.setCompletionStatus);
   }
 
   setupEventListeners() {
