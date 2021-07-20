@@ -1,12 +1,17 @@
-define([
-  'libraries/vimeo-player.min'
-], function(Player) {
+import Player from 'libraries/vimeo-player.min';
 
-  return Backbone.View.extend({
+export default class VimeoView extends Backbone.View {
 
-    template: 'vimeoVideo',
+  get template() {
+    return 'vimeoVideo';
+  }
 
-    vimeoEvents: [
+  className() {
+    return 'vimeo__video';
+  }
+
+  initialize() {
+    this.vimeoEvents = [
       'play',
       'pause',
       'ended',
@@ -15,94 +20,89 @@ define([
       'seeked',
       'error',
       'loaded'
-    ],
+    ];
+    
+    this.setupPlayer();
+    this.setupResponsiveSizing();
+    this.setupEventListeners();
+  }
 
-    className: 'vimeo__video',
+  /**
+   * Instantiate the vimeo player with the options supplied
+   */
+  setupPlayer() {
+    const options = {
+      url: this.model._source,
+      autoplay: this.model._autoplay,
+      loop: this.model._loop
+    };
 
-    initialize: function() {
-      this.setupPlayer();
-      this.setupResponsiveSizing();
-      this.setupEventListeners();
-    },
+    this.player = new Player(this.el, options);
+  }
 
-    /**
-     * Instantiate the vimeo player with the options supplied
-     */
-    setupPlayer: function() {
-      var options = {
-        url: this.model._source,
-        autoplay: this.model._autoplay,
-        loop: this.model._loop
-      };
+  /**
+   * Use the vimeo player's methods to determine the aspect ratio,
+   * and set the padding on this view's element accordingly
+   */
+  setupResponsiveSizing() {
+    const $el = this.$el;
+    const player = this.player;
+    const self = this;
 
-      this.player = new Player(this.el, options);
-    },
+    player
+      .getVideoWidth()
+      .then(width => {
+        self.videoWidth = width;
+        return player.getVideoHeight();
+      })
+      .then(height => {
+        self.videoHeight = height;
+        const ratio = self.videoHeight / self.videoWidth * 100;
+        $el.css({ paddingTop: ratio + '%' });
+        self.trigger('ready');
+      });
+  }
 
-    /**
-     * Use the vimeo player's methods to determine the aspect ratio,
-     * and set the padding on this view's element accordingly
-     */
-    setupResponsiveSizing: function() {
-      var $el = this.$el;
-      var player = this.player;
-      var self = this;
-
-      player
-        .getVideoWidth()
-        .then(function(width) {
-          self.videoWidth = width;
-          return player.getVideoHeight();
-        })
-        .then(function(height) {
-          self.videoHeight = height;
-          var ratio = self.videoHeight / self.videoWidth * 100;
-          $el.css({ paddingTop: ratio + '%' });
-          self.trigger('ready');
+  /**
+   * Trigger the vimeo player's events on this view so that it can act as an abstraction of the player
+   * also set up inview listener for 'pause when offscreen', if that's been enabled
+   */
+  setupEventListeners() {
+    this.vimeoEvents.forEach(eventType => {
+      this.player.on(eventType, (data) => {
+        this.trigger(eventType, {
+          type: eventType,
+          data: data
         });
-    },
+      });
+    });
 
-    /**
-     * Trigger the vimeo player's events on this view so that it can act as an abstraction of the player
-     * also set up inview listener for 'pause when offscreen', if that's been enabled
-     */
-    setupEventListeners: function() {
-      this.vimeoEvents.forEach(function(eventType) {
-        this.player.on(eventType, function(data) {
-          this.trigger(eventType, {
-            type: eventType,
-            data: data
-          });
-        }.bind(this));
-      }, this);
+    if (!this.model._pauseWhenOffScreen) return;
 
-      if (!this.model._pauseWhenOffScreen) return;
+    this.$el.on('inview.pauseWhenOffScreen', this.onPlayerInview.bind(this));
+  }
 
-      this.$el.on('inview.pauseWhenOffScreen', this.onPlayerInview.bind(this));
-    },
+  onPlayerInview(event, isInView) {
+    if (isInView) return;
+    this.player.getPaused().then(paused => {
+      if (paused) return;
+      this.player.pause();
+    });
+  }
 
-    onPlayerInview: function(event, isInView) {
-      if (isInView) return;
-      this.player.getPaused().then(function(paused) {
-        if (paused) return;
-        this.player.pause();
-      }.bind(this));
-    },
+  /**
+   * Destroy the player instance before removal
+   */
+  remove() {
+    if (this.model._pauseWhenOffScreen) this.$el.off('inview.pauseWhenOffScreen');
 
-    /**
-     * Destroy the player instance before removal
-     */
-    remove: function() {
-      if (this.model._pauseWhenOffScreen) this.$el.off('inview.pauseWhenOffScreen');
-
-      try {
-        this.player.destroy();
-      } catch(e) {
-        console.log(e)
-      }
-
-      Backbone.View.prototype.remove.call(this);
+    try {
+      this.player.destroy();
+    } catch(e) {
+      console.log(e)
     }
 
-  });
+    super.remove();
+  }
 
-});
+}
