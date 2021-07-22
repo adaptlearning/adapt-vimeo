@@ -65,7 +65,7 @@ export default class VimeoView extends Backbone.View {
    */
   setupEventListeners() {
     this.vimeoEvents.forEach(eventType => {
-      this.player.on(eventType, (data) => {
+      this.player.on(eventType, data => {
         this.trigger(eventType, {
           type: eventType,
           data: data
