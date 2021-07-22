@@ -21,7 +21,7 @@ export default class VimeoView extends Backbone.View {
       'error',
       'loaded'
     ];
-    
+
     this.setupPlayer();
     this.setupResponsiveSizing();
     this.setupEventListeners();
