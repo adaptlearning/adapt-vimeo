@@ -1,7 +1,7 @@
 import Adapt from 'core/js/adapt';
 
 export default class TranscriptView extends Backbone.View {
-  
+
   get template() {
     return 'vimeoTranscript';
   }
@@ -14,7 +14,7 @@ export default class TranscriptView extends Backbone.View {
     return {
       'click .js-vimeo-inline-transcript-toggle': 'onToggleInlineTranscript',
       'click .js-vimeo-external-transcript-click': 'onExternalTranscriptClicked'
-    }
+    };
   }
 
   initialize() {

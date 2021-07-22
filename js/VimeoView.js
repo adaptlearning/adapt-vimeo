@@ -45,21 +45,17 @@ export default class VimeoView extends Backbone.View {
    * and set the padding on this view's element accordingly
    */
   setupResponsiveSizing() {
-    const $el = this.$el;
-    const player = this.player;
-    const self = this;
-
-    player
+    this.player
       .getVideoWidth()
       .then(width => {
-        self.videoWidth = width;
-        return player.getVideoHeight();
+        this.videoWidth = width;
+        return this.player.getVideoHeight();
       })
       .then(height => {
-        self.videoHeight = height;
-        const ratio = self.videoHeight / self.videoWidth * 100;
-        $el.css({ paddingTop: ratio + '%' });
-        self.trigger('ready');
+        this.videoHeight = height;
+        const ratio = this.videoHeight / this.videoWidth * 100;
+        this.$el.css({ paddingTop: ratio + '%' });
+        this.trigger('ready');
       });
   }
 
@@ -84,10 +80,7 @@ export default class VimeoView extends Backbone.View {
 
   onPlayerInview(event, isInView) {
     if (isInView) return;
-    this.player.getPaused().then(paused => {
-      if (paused) return;
-      this.player.pause();
-    });
+    this.player.getPaused().then(paused => !paused && this.player.pause());
   }
 
   /**
@@ -99,7 +92,7 @@ export default class VimeoView extends Backbone.View {
     try {
       this.player.destroy();
     } catch(e) {
-      console.log(e)
+      console.log(e);
     }
 
     super.remove();

@@ -3,6 +3,7 @@ import ComponentView from 'core/js/views/componentView';
 import ComponentModel from 'core/js/models/componentModel';
 import VimeoView from './VimeoView';
 import TranscriptView from './TranscriptView';
+import COMPLETION_STATE from './completionStateEnum';
 
 class Vimeo extends ComponentView {
 
@@ -10,16 +11,6 @@ class Vimeo extends ComponentView {
     return {
       'click .js-skip-to-transcript': 'onSkipToTranscript'
     };
-  }
-
-  preRender() {
-    this.COMPLETION = ENUM([
-      'INVIEW',
-      'PLAY',
-      'ENDED'
-    ], value => {
-      return (typeof value === 'string') ? value.toUpperCase() : value;
-    });
   }
 
   postRender() {
@@ -61,9 +52,9 @@ class Vimeo extends ComponentView {
       ended: this.handleMediaEvent
     });
 
-    const completionEvent = this.COMPLETION(this.model.get('_setCompletionOn')) || this.COMPLETION.PLAY;
+    const completionEvent = COMPLETION_STATE(this.model.get('_setCompletionOn')) || COMPLETION_STATE.PLAY;
 
-    if (completionEvent === this.COMPLETION.INVIEW) {
+    if (completionEvent === COMPLETION_STATE.INVIEW) {
       return this.setupInviewCompletion('.component__widget', this.setCompletionStatus);
     }
 
@@ -77,7 +68,7 @@ class Vimeo extends ComponentView {
    * @returns {Backbone.View}
    */
   addSubview(constructor, model) {
-    const view = new constructor({ model: model });
+    const view = new constructor({ model });
     this.$widget.append(view.$el);
     return view;
   }
@@ -139,9 +130,7 @@ class Vimeo extends ComponentView {
 
 };
 
-Adapt.register('vimeo', {
+export default Adapt.register('vimeo', {
   model: ComponentModel.extend({}), // create a new class in the inheritance chain so it can be extended per component type if necessary later
   view: Vimeo
 });
-
-export default Vimeo;
