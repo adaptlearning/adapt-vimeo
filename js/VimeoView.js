@@ -44,19 +44,11 @@ export default class VimeoView extends Backbone.View {
    * Use the vimeo player's methods to determine the aspect ratio,
    * and set the padding on this view's element accordingly
    */
-  setupResponsiveSizing() {
-    this.player
-      .getVideoWidth()
-      .then(width => {
-        this.videoWidth = width;
-        return this.player.getVideoHeight();
-      })
-      .then(height => {
-        this.videoHeight = height;
-        const ratio = this.videoHeight / this.videoWidth * 100;
-        this.$el.css({ paddingTop: ratio + '%' });
-        this.trigger('ready');
-      });
+  async setupResponsiveSizing() {
+    const videoWidth = await this.player.getVideoWidth();
+    const videoHeight = await this.player.getVideoHeight();
+    this.$el.css('padding-top', `${videoHeight / videoWidth * 100}%`);
+    this.trigger('ready');
   }
 
   /**
