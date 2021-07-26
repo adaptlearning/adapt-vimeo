@@ -3,7 +3,7 @@ import ComponentView from 'core/js/views/componentView';
 import ComponentModel from 'core/js/models/componentModel';
 import VimeoView from './VimeoView';
 import TranscriptView from './TranscriptView';
-import COMPLETION_STATE from './completionStateEnum';
+import COMPLETION from './completionEnum';
 
 class Vimeo extends ComponentView {
 
@@ -52,9 +52,9 @@ class Vimeo extends ComponentView {
       ended: this.handleMediaEvent
     });
 
-    const completionEvent = COMPLETION_STATE(this.model.get('_setCompletionOn')) || COMPLETION_STATE.PLAY;
+    const completionEvent = COMPLETION(this.model.get('_setCompletionOn')) || COMPLETION.PLAY;
 
-    if (completionEvent === COMPLETION_STATE.INVIEW) {
+    if (completionEvent === COMPLETION.INVIEW) {
       return this.setupInviewCompletion('.component__widget', this.setCompletionStatus);
     }
 

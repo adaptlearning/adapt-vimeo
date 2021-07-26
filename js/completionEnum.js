@@ -1,8 +1,7 @@
-
-const COMPLETION_STATE = ENUM([
+const COMPLETION = ENUM([
   'INVIEW',
   'PLAY',
   'ENDED'
 ], value => value?.toUpperCase?.());
   
-export default COMPLETION_STATE;
+export default COMPLETION;

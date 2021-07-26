@@ -91,7 +91,7 @@ export default class VimeoView extends Backbone.View {
 
     try {
       this.player.destroy();
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
 
