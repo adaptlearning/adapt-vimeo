@@ -28,8 +28,8 @@ export default class VimeoView extends Backbone.View {
   }
 
   /**
-     * Instantiate the vimeo player with the options supplied
-     */
+  * Instantiate the vimeo player with the options supplied
+  */
   setupPlayer() {
     const options = {
       url: this.model._source.trim(),
@@ -41,9 +41,9 @@ export default class VimeoView extends Backbone.View {
   }
 
   /**
-     * Use the vimeo player's methods to determine the aspect ratio,
-     * and set the padding on this view's element accordingly
-     */
+  * Use the vimeo player's methods to determine the aspect ratio,
+  * and set the padding on this view's element accordingly
+  */
   async setupResponsiveSizing() {
     const videoWidth = await this.player.getVideoWidth();
     const videoHeight = await this.player.getVideoHeight();
@@ -52,9 +52,9 @@ export default class VimeoView extends Backbone.View {
   }
 
   /**
-     * Trigger the vimeo player's events on this view so that it can act as an abstraction of the player
-     * also set up inview listener for 'pause when offscreen', if that's been enabled
-     */
+  * Trigger the vimeo player's events on this view so that it can act as an abstraction of the player
+  * also set up inview listener for 'pause when offscreen', if that's been enabled
+  */
   setupEventListeners() {
     this.vimeoEvents.forEach(eventType => {
       this.player.on(eventType, data => {
@@ -76,8 +76,8 @@ export default class VimeoView extends Backbone.View {
   }
 
   /**
-     * Destroy the player instance before removal
-     */
+  * Destroy the player instance before removal
+  */
   remove() {
     if (this.model._pauseWhenOffScreen) this.$el.off('inview.pauseWhenOffScreen');
 
