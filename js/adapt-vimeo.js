@@ -21,8 +21,8 @@ class Vimeo extends ComponentView {
   }
 
   /**
-  * Setup the vimeo view and player instance
-  */
+   * Setup the vimeo view and player instance
+   */
   setupPlayer() {
     this.vimeoView = this.addSubview(VimeoView, this.model.get('_media'));
 
@@ -30,8 +30,8 @@ class Vimeo extends ComponentView {
   }
 
   /**
-  * Render the transcript and setup the completion event if configured
-  */
+   * Render the transcript and setup the completion event if configured
+   */
   setupTranscript() {
     const transcriptConfig = this.model.get('_transcript') || {};
 
@@ -62,11 +62,11 @@ class Vimeo extends ComponentView {
   }
 
   /**
-  * Add a sub view to this component's widget element
-  * @param {Backbone.View} constructor
-  * @param {object} model - the data to pass as the view's model
-  * @returns {Backbone.View}
-  */
+   * Add a sub view to this component's widget element
+   * @param {Backbone.View} constructor
+   * @param {object} model - the data to pass as the view's model
+   * @returns {Backbone.View}
+   */
   addSubview(constructor, model) {
     const view = new constructor({ model });
     this.$widget.append(view.$el);
@@ -78,9 +78,9 @@ class Vimeo extends ComponentView {
   }
 
   /**
-  * Filter rapidly firing events so that only meaningful 'media' events are triggered
-  * @param {object} event
-  */
+   * Filter rapidly firing events so that only meaningful 'media' events are triggered
+   * @param {object} event
+   */
   handleMediaEvent(event) {
     const eventType = event.type;
     const rapidFireTimeoutWindow = 500;
@@ -107,9 +107,9 @@ class Vimeo extends ComponentView {
   }
 
   /**
-  * Trigger a global 'media' event
-  * @param {string} eventType
-  */
+   * Trigger a global 'media' event
+   * @param {string} eventType
+   */
   triggerGlobalEvent(eventType) {
     Adapt.trigger('media', {
       isVideo: true,
@@ -120,8 +120,8 @@ class Vimeo extends ComponentView {
   }
 
   /**
-  * Remove this view and sub views. Destroys the vimeo player instance
-  */
+   * Remove this view and sub views. Destroys the vimeo player instance
+   */
   remove() {
     this.vimeoView.remove();
     this.transcriptView && this.transcriptView.remove();
