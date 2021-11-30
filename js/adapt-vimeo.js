@@ -114,7 +114,7 @@ class Vimeo extends ComponentView {
     Adapt.trigger('media', {
       isVideo: true,
       type: eventType,
-      src: this.model.get('_media')._source.trim(),
+      src: this.model.get('_media')._source?.trim(),
       platform: 'Vimeo'
     });
   }
