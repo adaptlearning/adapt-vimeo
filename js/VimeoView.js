@@ -32,7 +32,7 @@ export default class VimeoView extends Backbone.View {
    */
   setupPlayer() {
     const options = {
-      url: this.model._source,
+      url: this.model._source?.trim(),
       autoplay: this.model._autoplay,
       loop: this.model._loop
     };
