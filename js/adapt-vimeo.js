@@ -1,3 +1,4 @@
+import a11y from 'core/js/a11y';
 import Adapt from 'core/js/adapt';
 import ComponentView from 'core/js/views/componentView';
 import ComponentModel from 'core/js/models/componentModel';
@@ -74,7 +75,7 @@ class Vimeo extends ComponentView {
   }
 
   onSkipToTranscript() {
-    Adapt.a11y.focusFirst(this.$('.vimeo__transcript-btn'));
+    a11y.focusFirst(this.$('.vimeo__transcript-btn'));
   }
 
   /**
