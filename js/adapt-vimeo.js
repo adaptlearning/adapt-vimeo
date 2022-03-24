@@ -4,6 +4,8 @@ import ComponentModel from 'core/js/models/componentModel';
 import VimeoView from './VimeoView';
 import TranscriptView from './TranscriptView';
 import COMPLETION from './completionEnum';
+import a11y from 'core/js/a11y';
+import components from 'core/js/components';
 
 class Vimeo extends ComponentView {
 
@@ -74,7 +76,7 @@ class Vimeo extends ComponentView {
   }
 
   onSkipToTranscript() {
-    Adapt.a11y.focusFirst(this.$('.vimeo__transcript-btn'));
+    a11y.focusFirst(this.$('.vimeo__transcript-btn'));
   }
 
   /**
@@ -130,7 +132,7 @@ class Vimeo extends ComponentView {
 
 };
 
-export default Adapt.register('vimeo', {
+export default components.register('vimeo', {
   model: ComponentModel.extend({}), // create a new class in the inheritance chain so it can be extended per component type if necessary later
   view: Vimeo
 });
