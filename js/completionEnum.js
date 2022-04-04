@@ -3,5 +3,5 @@ const COMPLETION = ENUM([
   'PLAY',
   'ENDED'
 ], value => value?.toUpperCase?.());
-  
+
 export default COMPLETION;
