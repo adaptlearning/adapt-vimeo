@@ -23,7 +23,7 @@ The attributes listed below are used in *components.json* to configure **Adapt V
 **instruction** (string): This optional text appears above the component. It is frequently used to
 guide the learner’s interaction with the component.
 
-**_setCompletionOn** (string): This determines when Adapt will register this component as having been completed by the user. Acceptable values are `inview` (triggered when the component is fully displayed within the viewport), `play` (triggered when playback is initiated), or `ended` (triggered when the video has reached the end of playback). 
+**_setCompletionOn** (string): This determines when Adapt will register this component as having been completed by the user. Acceptable values are `inview` (triggered when the component is fully displayed within the viewport), `play` (triggered when playback is initiated), or `ended` (triggered when the video has reached the end of playback).
 
 
 **_media** (object): The media configuration, containing values for **_source**, **_autoplay**, **_loop** and **_pauseWhenOffScreen**
@@ -41,19 +41,19 @@ guide the learner’s interaction with the component.
 
 >**_setCompletionOnView** (boolean): This determines if Adapt will register this component as having been completed by the user when the inline transcript is opened. This is true by default.
 
->**_inlineTranscript** (boolean): Determines whether the button that toggles the display of the inline transcript text will be displayed or not. 
+>**_inlineTranscript** (boolean): Determines whether the button that toggles the display of the inline transcript text will be displayed or not.
 
 >**_externalTranscript** (boolean): Determines whether the button that links to the optional external transcript will be displayed or not.
 
 >**inlineTranscriptButton** (string): This text appears on the button that toggles the visibility of the inline transcript text. It is displayed when the inline transcript text is hidden. If no text is provided, the **transcriptLink** will be displayed on the button.
 
->**inlineTranscriptCloseButton** (string): This text appears on the button that toggles the visibility of the inline transcript. It is displayed when the inline transcript text is visible. 
+>**inlineTranscriptCloseButton** (string): This text appears on the button that toggles the visibility of the inline transcript. It is displayed when the inline transcript text is visible.
 
 >**inlineTranscriptBody** (string): This optional text appears below the video. If provided, its visibility is toggled by clicking the transcript button. It is hidden by default.
 
 >**transcriptLinkButton** (string): This text appears on the button that links to the optional external transcript. If no text is provided, the **transcriptLink** will be displayed on the button.
 
->**transcriptLink** (string): File name (including path) of the optional external transcript. Path should be relative to the *src* folder (e.g., *course/en/pdf/video01_transcript.pdf*).  
+>**transcriptLink** (string): File name (including path) of the optional external transcript. Path should be relative to the *src* folder (e.g., *course/en/pdf/video01_transcript.pdf*).
 
 
 ### Accessibility
@@ -63,6 +63,6 @@ guide the learner’s interaction with the component.
 No known limitations
 
 ----------------------------
-**Version number:** 2.2.1  
-**Framework versions:** 5.8.0  
-**Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-vimeo/graphs/contributors)  
+**Version number:** 3.0.0
+**Framework versions:** 5.19.1
+**Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-vimeo/graphs/contributors)
