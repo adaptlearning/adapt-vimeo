@@ -5,7 +5,6 @@ import ComponentModel from 'core/js/models/componentModel';
 import VimeoView from './VimeoView';
 import TranscriptView from './TranscriptView';
 import COMPLETION from './completionEnum';
-import a11y from 'core/js/a11y';
 import components from 'core/js/components';
 
 class Vimeo extends ComponentView {
