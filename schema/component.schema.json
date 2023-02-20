@@ -1,0 +1,138 @@
+{
+  "$anchor": "vimeo-component",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$merge": {
+    "source": {
+      "$ref": "component"
+    },
+    "with": {
+      "required": [
+        "_media"
+      ],
+      "properties": {
+        "_supportedLayout": {
+          "type": "string",
+          "title": "Supported layout",
+          "default": "both",
+          "_adapt": {
+            "editorOnly": true
+          }
+        },
+        "instruction": {
+          "type": "string",
+          "title": "Instruction",
+          "default": ""
+        },
+        "_setCompletionOn": {
+          "type": "string",
+          "title": "Set completion of Video on",
+          "description": "Defines what media event should trigger completion of this component.",
+          "default": "play",
+          "enum": [
+            "inview",
+            "play",
+            "ended"
+          ],
+          "_backboneForms": "Select"
+        },
+        "_media": {
+          "type": "object",
+          "title": "Media settings",
+          "properties": {
+            "_source": {
+              "type": "string",
+              "title": "Source URL",
+              "description": "The URL of the Vimeo video you want to be displayed. This can be a direct, or an embed link",
+              "default": ""
+            },
+            "_autoplay": {
+              "type": "boolean",
+              "title": "Autoplay",
+              "description": "Specifies whether or not the video will automatically start to play when the player loads (where supported).",
+              "default": false
+            },
+            "_loop": {
+              "type": "boolean",
+              "title": "Loop",
+              "description": "Whether to play the video on a loop or not.",
+              "default": false
+            },
+            "_pauseWhenOffScreen": {
+              "type": "boolean",
+              "title": "Pause playback when video is no longer in view.",
+              "default": false
+            }
+          }
+        },
+        "_transcript": {
+          "type": "object",
+          "title": "Transcript Options",
+          "default": {},
+          "properties": {
+            "_setCompletionOnView": {
+              "type": "boolean",
+              "title": "Trigger completion?",
+              "description": "Whether to have this component mark as completed when the transcript is shown.",
+              "default": true
+            },
+            "_inlineTranscript": {
+              "type": "boolean",
+              "title": "Show Inline",
+              "default": false
+            },
+            "_externalTranscript": {
+              "type": "boolean",
+              "title": "Show Link",
+              "default": false
+            },
+            "inlineTranscriptButton": {
+              "type": "string",
+              "title": "Inline Open Button",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "inlineTranscriptCloseButton": {
+              "type": "string",
+              "title": "Inline Close Button",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "inlineTranscriptBody": {
+              "type": "string",
+              "title": "Inline Transcript",
+              "description": "Optional text appears below the video",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              },
+              "_backboneForms": "TextArea"
+            },
+            "transcriptLinkButton": {
+              "type": "string",
+              "title": "Link Open Button",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "transcriptLink": {
+              "type": "string",
+              "isObjectId": true,
+              "title": "Transcript Link",
+              "description": "Select a file for the transcript link",
+              "_backboneForms": {
+                "type": "Asset",
+                "media": "other"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
