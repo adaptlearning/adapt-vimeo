@@ -30,10 +30,11 @@
     "instruction": {
       "type": "string",
       "required": false,
-      "default": "",
+      "default": "Select the play button to start the video.",
       "inputType": "Text",
       "validators": [],
-      "help": ""
+      "help": "This is the instruction text",
+      "translatable": true
     },
     "_setCompletionOn": {
       "type": "string",

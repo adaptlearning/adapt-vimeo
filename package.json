@@ -6,8 +6,8 @@
   "issues": "https://github.com/adaptlearning/adapt-vimeo/issues/new",
   "component": "vimeo",
   "targetAttribute": "_vimeo",
-  "displayName": "Vimeo Player",
-  "description": "Vimeo Player for Adapt",
+  "displayName": "Vimeo",
+  "description": "Media player for when content needs to be streamed from the video hosting platform, Vimeo.",
   "main": "/js/adapt-vimeo.js",
   "keywords": [
     "adapt-plugin",
