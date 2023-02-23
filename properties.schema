@@ -14,10 +14,10 @@
     },
     "skipToTranscript": {
       "type": "string",
-      "required": false,
+      "required": true,
       "default": "Skip to transcript",
       "inputType": "Text",
-      "validators": [],,
+      "validators": [],
       "translatable": true
     }
   },
@@ -162,7 +162,8 @@
           "default": "",
           "title": "Linked transcript file source",
           "inputType": "Asset:other",
-          "validators": []
+          "validators": [],
+          "help": "Select a file for the transcript link"
         }
       }
     }
