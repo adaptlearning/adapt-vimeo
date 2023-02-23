@@ -15,6 +15,11 @@
           "type": "string",
           "title": "Supported layout",
           "default": "both",
+          "enum": [
+            "full-width",
+            "half-width",
+            "both"
+          ],
           "_adapt": {
             "editorOnly": true
           }
@@ -48,7 +53,12 @@
               "type": "string",
               "title": "Source URL",
               "description": "The URL of the Vimeo video you want to be displayed. This can be a direct, or an embed link",
-              "default": ""
+              "default": "",
+              "_backboneForms": {
+                "editorAttrs": {
+                  "placeholder": "//www.vimeo.com/288344114"
+                }
+              }
             },
             "_autoplay": {
               "type": "boolean",
@@ -71,28 +81,27 @@
         },
         "_transcript": {
           "type": "object",
-          "title": "Transcript Options",
+          "title": "Transcript",
           "default": {},
           "properties": {
             "_setCompletionOnView": {
               "type": "boolean",
-              "title": "Trigger completion?",
-              "description": "Whether to have this component mark as completed when the transcript is shown.",
+              "title": "Mark this component as complete when transcript is shown",
               "default": true
             },
             "_inlineTranscript": {
               "type": "boolean",
-              "title": "Show Inline",
+              "title": "Enable inline transcript",
               "default": false
             },
             "_externalTranscript": {
               "type": "boolean",
-              "title": "Show Link",
+              "title": "Enable linked transcript file",
               "default": false
             },
             "inlineTranscriptButton": {
               "type": "string",
-              "title": "Inline Open Button",
+              "title": "Inline transcript open button label",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -100,7 +109,7 @@
             },
             "inlineTranscriptCloseButton": {
               "type": "string",
-              "title": "Inline Close Button",
+              "title": "Inline transcript close button label",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -108,8 +117,7 @@
             },
             "inlineTranscriptBody": {
               "type": "string",
-              "title": "Inline Transcript",
-              "description": "Optional text appears below the video",
+              "title": "Inline transcript",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -118,7 +126,7 @@
             },
             "transcriptLinkButton": {
               "type": "string",
-              "title": "Link Open Button",
+              "title": "Linked transcript file button label",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -127,8 +135,7 @@
             "transcriptLink": {
               "type": "string",
               "isObjectId": true,
-              "title": "Transcript Link",
-              "description": "Select a file for the transcript link",
+              "title": "Linked transcript file source",
               "_backboneForms": {
                 "type": "Asset",
                 "media": "other"

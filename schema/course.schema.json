@@ -18,13 +18,16 @@
               "properties": {
                 "ariaRegion": {
                   "type": "string",
-                  "title": "Aria region",
+                  "title": "Vimeo: ARIA region",
                   "default": "This is a media component which displays a Vimeo video. Select the play / pause button to watch it."
                 },
                 "skipToTranscript": {
                   "type": "string",
                   "title": "Skip to transcript",
-                  "default": "Skip to transcript"
+                  "default": "Skip to transcript",
+                  "_adapt": {
+                    "translatable": true
+                  }
                 }
               }
             }
