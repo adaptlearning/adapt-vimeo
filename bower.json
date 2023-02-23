@@ -3,7 +3,7 @@
   "version": "3.1.1",
   "framework": ">=5.19.1",
   "homepage": "https://github.com/adaptlearning/adapt-vimeo",
-  "issues": "https://github.com/adaptlearning/adapt-vimeo/issues/new",
+  "issues": "https://github.com/adaptlearning/adapt-vimeo/issues",
   "component": "vimeo",
   "targetAttribute": "_vimeo",
   "displayName": "Vimeo",
