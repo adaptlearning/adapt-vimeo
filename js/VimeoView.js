@@ -60,7 +60,7 @@ export default class VimeoView extends Backbone.View {
       this.player.on(eventType, data => {
         this.trigger(eventType, {
           type: eventType,
-          data: data
+          data
         });
       });
     });

@@ -1,0 +1,149 @@
+{
+  "$anchor": "vimeo-component",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$merge": {
+    "source": {
+      "$ref": "component"
+    },
+    "with": {
+      "required": [
+        "_media"
+      ],
+      "properties": {
+        "_supportedLayout": {
+          "type": "string",
+          "title": "Supported layout",
+          "default": "both",
+          "enum": [
+            "full-width",
+            "half-width",
+            "both"
+          ],
+          "_adapt": {
+            "editorOnly": true
+          }
+        },
+        "instruction": {
+          "type": "string",
+          "title": "Instruction",
+          "description": "This is the instruction text",
+          "default": "Select the play button to start the video.",
+          "_adapt": {
+            "translatable": true
+          }
+        },
+        "_setCompletionOn": {
+          "type": "string",
+          "title": "Set completion of Video on",
+          "description": "Defines what media event should trigger completion of this component.",
+          "default": "play",
+          "enum": [
+            "inview",
+            "play",
+            "ended"
+          ],
+          "_backboneForms": "Select"
+        },
+        "_media": {
+          "type": "object",
+          "title": "Media settings",
+          "properties": {
+            "_source": {
+              "type": "string",
+              "title": "Source URL",
+              "description": "The URL of the Vimeo video you want to be displayed. This can be a direct, or an embed link",
+              "default": "",
+              "_backboneForms": {
+                "editorAttrs": {
+                  "placeholder": "//www.vimeo.com/288344114"
+                }
+              }
+            },
+            "_autoplay": {
+              "type": "boolean",
+              "title": "Autoplay",
+              "description": "Specifies whether or not the video will automatically start to play when the player loads (where supported).",
+              "default": false
+            },
+            "_loop": {
+              "type": "boolean",
+              "title": "Loop",
+              "description": "Whether to play the video on a loop or not.",
+              "default": false
+            },
+            "_pauseWhenOffScreen": {
+              "type": "boolean",
+              "title": "Pause playback when video is no longer in view.",
+              "default": false
+            }
+          }
+        },
+        "_transcript": {
+          "type": "object",
+          "title": "Transcript",
+          "default": {},
+          "properties": {
+            "_setCompletionOnView": {
+              "type": "boolean",
+              "title": "Mark this component as complete when transcript is shown",
+              "default": true
+            },
+            "_inlineTranscript": {
+              "type": "boolean",
+              "title": "Enable inline transcript",
+              "default": false
+            },
+            "_externalTranscript": {
+              "type": "boolean",
+              "title": "Enable linked transcript file",
+              "default": false
+            },
+            "inlineTranscriptButton": {
+              "type": "string",
+              "title": "Inline transcript open button label",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "inlineTranscriptCloseButton": {
+              "type": "string",
+              "title": "Inline transcript close button label",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "inlineTranscriptBody": {
+              "type": "string",
+              "title": "Inline transcript",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              },
+              "_backboneForms": "TextArea"
+            },
+            "transcriptLinkButton": {
+              "type": "string",
+              "title": "Linked transcript file button label",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "transcriptLink": {
+              "type": "string",
+              "isObjectId": true,
+              "title": "Linked transcript file source",
+              "_backboneForms": {
+                "type": "Asset",
+                "media": "other"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,26 +1,23 @@
 {
   "name": "adapt-vimeo",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/adaptlearning/adapt-vimeo.git"
-  },
   "version": "3.1.1",
   "framework": ">=5.19.1",
   "homepage": "https://github.com/adaptlearning/adapt-vimeo",
-  "issues": "https://github.com/adaptlearning/adapt-vimeo/issues/new",
+  "issues": "https://github.com/adaptlearning/adapt-vimeo/issues",
   "component": "vimeo",
-  "displayName": "Vimeo Player",
-  "description": "Vimeo Player for Adapt",
+  "targetAttribute": "_vimeo",
+  "displayName": "Vimeo",
+  "description": "Media player for when content needs to be streamed from the video hosting platform, Vimeo.",
   "main": "/js/adapt-vimeo.js",
   "keywords": [
     "adapt-plugin",
     "adapt-component"
   ],
+  "license": "GPL-3.0",
+  "private": true,
   "authors": [
     "Dan Storey <danielstorey@gmail.com>"
   ],
-  "license": "GPL-3.0",
-  "private": true,
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",

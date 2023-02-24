@@ -20,11 +20,9 @@ The attributes listed below are used in *components.json* to configure **Adapt V
 
 **_layout** (string): This defines the horizontal position of the component in the block. Acceptable values are `full`, `left` or `right`.
 
-**instruction** (string): This optional text appears above the component. It is frequently used to
-guide the learner’s interaction with the component.
+**instruction** (string): This optional text appears above the component. It is frequently used to guide the learner’s interaction with the component.
 
 **_setCompletionOn** (string): This determines when Adapt will register this component as having been completed by the user. Acceptable values are `inview` (triggered when the component is fully displayed within the viewport), `play` (triggered when playback is initiated), or `ended` (triggered when the video has reached the end of playback).
-
 
 **_media** (object): The media configuration, containing values for **_source**, **_autoplay**, **_loop** and **_pauseWhenOffScreen**
 
@@ -35,7 +33,6 @@ guide the learner’s interaction with the component.
 >**_loop** (boolean): Automatically restart the video when it reaches the end
 
 >**_pauseWhenOffScreen** (boolean): If set to `true`, pause playback when video is no longer in view. The default is `false`.
-
 
 **_transcript** (object):  The transcript attributes group contains values for **_inlineTranscript**, **_externalTranscript**, **inlineTranscriptButton**, **inlineTranscriptCloseButton**, **inlineTranscriptBody**, **transcriptLinkButton**, and **transcriptLink**.
 
@@ -55,7 +52,6 @@ guide the learner’s interaction with the component.
 
 >**transcriptLink** (string): File name (including path) of the optional external transcript. Path should be relative to the *src* folder (e.g., *course/en/pdf/video01_transcript.pdf*).
 
-
 ### Accessibility
 
 ### Limitations
@@ -63,6 +59,5 @@ guide the learner’s interaction with the component.
 No known limitations
 
 ----------------------------
-**Version number:** 3.0.0
-**Framework versions:** 5.19.1
+**Framework versions:** 5.19.1<br>
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-vimeo/graphs/contributors)
