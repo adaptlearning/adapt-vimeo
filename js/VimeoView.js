@@ -1,7 +1,7 @@
 import Player from 'libraries/vimeo-player.min';
 
 export default class VimeoView extends Backbone.View {
-  
+
   get template() {
     return 'vimeoVideo';
   }
