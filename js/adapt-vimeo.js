@@ -3,7 +3,6 @@ import Adapt from 'core/js/adapt';
 import ComponentView from 'core/js/views/componentView';
 import ComponentModel from 'core/js/models/componentModel';
 import VimeoView from './VimeoView';
-import TranscriptView from './TranscriptView';
 import COMPLETION from './completionEnum';
 import components from 'core/js/components';
 
@@ -11,6 +10,8 @@ class Vimeo extends ComponentView {
 
   events() {
     return {
+      'click .js-vimeo-inline-transcript-toggle': 'onToggleInlineTranscript',
+      'click .js-vimeo-external-transcript-click': 'onExternalTranscriptClicked',
       'click .js-skip-to-transcript': 'onSkipToTranscript'
     };
   }
@@ -18,7 +19,6 @@ class Vimeo extends ComponentView {
   postRender() {
     this.$widget = this.$('.component__widget');
     this.setupPlayer();
-    this.setupTranscript();
     this.setupEventListeners();
   }
 
@@ -29,22 +29,6 @@ class Vimeo extends ComponentView {
     this.vimeoView = this.addSubview(VimeoView, this.model.get('_media'));
 
     this.listenToOnce(this.vimeoView, 'ready', this.setReadyStatus);
-  }
-
-  /**
-   * Render the transcript and setup the completion event if configured
-   */
-  setupTranscript() {
-    const transcriptConfig = this.model.get('_transcript') || {};
-
-    if (!transcriptConfig._inlineTranscript && !transcriptConfig._externalTranscript) {
-      return;
-    }
-
-    this.transcriptView = this.addSubview(TranscriptView, transcriptConfig);
-
-    if (!transcriptConfig._setCompletionOnView) return;
-    this.listenToOnce(this.transcriptView, 'transcript:open', this.setCompletionStatus);
   }
 
   setupEventListeners() {
@@ -73,10 +57,6 @@ class Vimeo extends ComponentView {
     const view = new constructor({ model });
     this.$widget.append(view.$el);
     return view;
-  }
-
-  onSkipToTranscript() {
-    a11y.focusFirst(this.$('.vimeo__transcript-btn'));
   }
 
   /**
@@ -119,6 +99,60 @@ class Vimeo extends ComponentView {
       src: this.model.get('_media')._source?.trim(),
       platform: 'Vimeo'
     });
+  }
+
+  onSkipToTranscript(event) {
+    // need slight delay before focussing button to make it work when JAWS is running
+    // see https://github.com/adaptlearning/adapt_framework/issues/2427
+    _.delay(() => {
+      a11y.focus(this.$('.vimeo__transcript-btn'));
+    }, 250);
+  }
+
+  /**
+   * Handles toggling the inline transcript open/closed
+   * and updating the label on the inline transcript button
+   */
+  onToggleInlineTranscript(event) {
+    if (event) event.preventDefault();
+    const $transcriptBodyContainer = this.$('.vimeo__transcript-body-inline');
+    const $button = this.$('.vimeo__transcript-btn-inline');
+    const $buttonText = $button.find('.vimeo__transcript-btn-text');
+
+    if ($transcriptBodyContainer.hasClass('inline-transcript-open')) {
+      $transcriptBodyContainer.stop(true, true).slideUp(() => {
+        $(window).resize();
+      }).removeClass('inline-transcript-open');
+      $button.attr('aria-expanded', false);
+      $buttonText.html(this.model.get('_transcript').inlineTranscriptButton);
+      this.transcriptTriggers('closed');
+
+      return;
+    }
+
+    $transcriptBodyContainer.stop(true, true).slideDown(() => {
+      $(window).resize();
+    }).addClass('inline-transcript-open');
+
+    $button.attr('aria-expanded', true);
+    $buttonText.html(this.model.get('_transcript').inlineTranscriptCloseButton);
+    this.transcriptTriggers('opened');
+  }
+  
+  onExternalTranscriptClicked(event) {
+    this.transcriptTriggers('external');
+  }
+
+  transcriptTriggers(state) {
+    const setCompletionOnView = this.model.get('_transcript')._setCompletionOnView;
+    const isComplete = this.model.get('_isComplete');
+    const shouldComplete = (setCompletionOnView && !isComplete);
+
+    if (!shouldComplete) {
+      return Adapt.trigger('vimeo:transcript', state, this);
+    }
+    this.setCompletionStatus();
+    Adapt.trigger('vimeo:transcript', 'complete', this);
   }
 
   /**
