@@ -4,9 +4,55 @@
   {{> component this}}
 
   {{#any _transcript._externalTranscript _transcript._inlineTranscript}}
-  <button class="aria-label js-skip-to-transcript" tabindex="-1" aria-label="{{_globals._components._vimeo.skipToTranscript}}"></button>
+  <button class="btn-text vimeo__skip-to-transcript js-skip-to-transcript">
+    {{_globals._components._vimeo.skipToTranscript}}
+  </button>
   {{/any}}
 
   <div class="component__widget vimeo__widget"></div>
+
+  {{#if _transcript}}
+  <div class="vimeo__transcript-container">
+
+    {{#if _transcript._inlineTranscript}}
+    <button class="vimeo__transcript-btn vimeo__transcript-btn-inline js-vimeo-inline-transcript-toggle" aria-expanded="false">
+      <span class="vimeo__transcript-btn-text">
+        {{#if _transcript.inlineTranscriptButton}}
+        {{_transcript.inlineTranscriptButton}}
+        {{else}}
+        {{_transcript.transcriptLink}}
+        {{/if}}
+      </span>
+      <span class="vimeo__transcript-btn-icon">
+        <span class="icon" aria-hidden="true"></span>
+      </span>
+    </button>
+    {{/if}}
+
+    {{#if _transcript._externalTranscript}}
+    <button class="vimeo__transcript-btn vimeo__transcript-btn-external js-vimeo-external-transcript-click" onclick="window.open('{{_transcript.transcriptLink}}')">
+      <span class="vimeo__transcript-btn-text">
+        {{#if _transcript.transcriptLinkButton}}
+        {{_transcript.transcriptLinkButton}}
+        {{else}}
+        {{_transcript.transcriptLink}}
+        {{/if}}
+      </span>
+      <span class="vimeo__transcript-btn-icon">
+        <span class="icon" aria-hidden="true"></span>
+      </span>
+    </button>
+    {{/if}}
+
+    {{#if _transcript._inlineTranscript}}
+    <div class="vimeo__transcript-body-inline" role="region" aria-label="{{#if _transcript.inlineTranscriptButton}}{{_transcript.inlineTranscriptButton}}{{else}}{{_transcript.transcriptLink}}{{/if}}">
+      <div class="vimeo__transcript-body-inline-inner">
+        {{{compile _transcript.inlineTranscriptBody}}}
+      </div>
+    </div>
+    {{/if}}
+
+  </div>
+  {{/if}}
 
 </div>
