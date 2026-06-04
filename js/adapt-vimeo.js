@@ -28,7 +28,25 @@ class Vimeo extends ComponentView {
   setupPlayer() {
     this.vimeoView = this.addSubview(VimeoView, this.model.get('_media'));
 
-    this.listenToOnce(this.vimeoView, 'ready', this.setReadyStatus);
+    this.listenToOnce(this.vimeoView, 'ready', this.onVimeoViewReady);
+  }
+
+  onVimeoViewReady() {
+    this.setIframeAriaLabel();
+    this.setReadyStatus();
+  }
+
+  /**
+   * Give the player iframe an author-controlled, localisable accessible name.
+   * The Vimeo library otherwise only sets a `title` from the video's own
+   * Vimeo title, which authors cannot control or localise.
+   */
+  setIframeAriaLabel() {
+    const ariaLabel = this.model.get('displayTitle') || this.model.get('title');
+    if (!ariaLabel) return;
+    const iframe = this.vimeoView.player?.element;
+    if (!iframe) return;
+    iframe.setAttribute('aria-label', ariaLabel);
   }
 
   setupEventListeners() {
