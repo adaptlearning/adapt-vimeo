@@ -32,7 +32,7 @@ class Vimeo extends ComponentView {
   }
 
   onVimeoViewReady() {
-    this.setIframeAriaLabel();
+    this.setIframeAccessibleName();
     this.setReadyStatus();
   }
 
@@ -40,13 +40,21 @@ class Vimeo extends ComponentView {
    * Give the player iframe an author-controlled, localisable accessible name.
    * The Vimeo library otherwise only sets a `title` from the video's own
    * Vimeo title, which authors cannot control or localise.
+   *
+   * When a displayTitle is set it renders as a visible component heading, so
+   * the iframe references that heading via aria-labelledby rather than
+   * duplicating the string. Otherwise the non-visible title field is used
+   * directly as an aria-label. Mirrors adapt-youtube#48.
    */
-  setIframeAriaLabel() {
-    const ariaLabel = this.model.get('displayTitle') || this.model.get('title');
-    if (!ariaLabel) return;
+  setIframeAccessibleName() {
     const iframe = this.vimeoView.player?.element;
     if (!iframe) return;
-    iframe.setAttribute('aria-label', ariaLabel);
+    if (this.model.get('displayTitle')) {
+      iframe.setAttribute('aria-labelledby', `${this.model.get('_id')}-heading`);
+      return;
+    }
+    const title = this.model.get('title');
+    if (title) iframe.setAttribute('aria-label', title);
   }
 
   setupEventListeners() {
