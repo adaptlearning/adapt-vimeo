@@ -28,7 +28,34 @@ class Vimeo extends ComponentView {
   setupPlayer() {
     this.vimeoView = this.addSubview(VimeoView, this.model.get('_media'));
 
-    this.listenToOnce(this.vimeoView, 'ready', this.setReadyStatus);
+    this.listenToOnce(this.vimeoView, 'ready', this.onVimeoViewReady);
+  }
+
+  onVimeoViewReady() {
+    this.setIframeAccessibleName();
+    this.setReadyStatus();
+  }
+
+  /**
+   * Give the player iframe an author-controlled, localisable accessible name.
+   * The Vimeo library otherwise only sets a `title` from the video's own
+   * Vimeo title, which authors cannot control or localise.
+   *
+   * Uses the displayTitle (or title) text rather than referencing the visible
+   * heading, as the heading also carries the completion status. The ariaLabel
+   * global wraps it (e.g. "Video: {{title}}") so the frame is identified as a
+   * video. With no title, Vimeo's own title is left in place.
+   */
+  setIframeAccessibleName() {
+    const iframe = this.vimeoView.player?.element;
+    if (!iframe) return;
+    const data = this.model.toJSON();
+    const title = Handlebars.helpers.compile_a11y_normalize(data.displayTitle || data.title, data);
+    if (!title) return;
+    const ariaLabel = Adapt.course.get('_globals')?._components?._vimeo?.ariaLabel;
+    const name = Handlebars.helpers.compile_a11y_normalize(ariaLabel, { ...data, title }) || title;
+    iframe.setAttribute('aria-label', name);
+    iframe.setAttribute('title', name);
   }
 
   setupEventListeners() {
