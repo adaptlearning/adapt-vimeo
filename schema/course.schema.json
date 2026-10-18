@@ -12,30 +12,36 @@
           "type": "object",
           "default": {},
           "properties": {
-            "_vimeo": {
+            "_components": {
               "type": "object",
               "default": {},
               "properties": {
-                "ariaRegion": {
-                  "type": "string",
-                  "title": "Vimeo: ARIA region",
-                  "default": "This is a media component which displays a Vimeo video. Select the play / pause button to watch it.{{#any _transcript._inlineTranscript _transcript._externalTranscript}} An alternative transcript is also available.{{/any}}"
-                },
-                "ariaLabel": {
-                  "type": "string",
-                  "title": "Video player label",
-                  "description": "Accessible name for the video player. {{title}} is the component's display title, or title if no display title is set",
-                  "default": "Video: {{title}}",
-                  "_adapt": {
-                    "translatable": true
-                  }
-                },
-                "skipToTranscript": {
-                  "type": "string",
-                  "title": "Skip to transcript",
-                  "default": "Skip to transcript",
-                  "_adapt": {
-                    "translatable": true
+                "_vimeo": {
+                  "type": "object",
+                  "default": {},
+                  "properties": {
+                    "ariaRegion": {
+                      "type": "string",
+                      "title": "Vimeo: ARIA region",
+                      "default": "This is a media component which displays a Vimeo video. Select the play / pause button to watch it.{{#any _transcript._inlineTranscript _transcript._externalTranscript}} An alternative transcript is also available.{{/any}}"
+                    },
+                    "ariaLabel": {
+                      "type": "string",
+                      "title": "Video player label",
+                      "description": "Accessible name for the video player. {{title}} is the component's display title, or title if no display title is set",
+                      "default": "Video: {{title}}",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    },
+                    "skipToTranscript": {
+                      "type": "string",
+                      "title": "Skip to transcript",
+                      "default": "Skip to transcript",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
                   }
                 }
               }
