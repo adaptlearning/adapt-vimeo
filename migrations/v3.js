@@ -1,10 +1,10 @@
 import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin, getCourse, testStopWhere, testSuccessWhere } from 'adapt-migrations';
 import _ from 'lodash';
 
-describe('adapt-vimeo - v@@CURRENT_VERSION to v@@RELEASE_VERSION', async () => {
+describe('adapt-vimeo - v3.5.1 to v3.5.2', async () => {
   let course;
 
-  whereFromPlugin('adapt-vimeo - from v@@CURRENT_VERSION', { name: 'adapt-vimeo', version: '<@@RELEASE_VERSION' });
+  whereFromPlugin('adapt-vimeo - from v3.5.1', { name: 'adapt-vimeo', version: '<3.5.2' });
 
   whereContent('adapt-vimeo - where course has flat _globals._vimeo', async content => {
     course = getCourse();
@@ -25,10 +25,10 @@ describe('adapt-vimeo - v@@CURRENT_VERSION to v@@RELEASE_VERSION', async () => {
     return true;
   });
 
-  updatePlugin('adapt-vimeo - update to v@@RELEASE_VERSION', { name: 'adapt-vimeo', version: '@@RELEASE_VERSION', framework: '>=5.19.1' });
+  updatePlugin('adapt-vimeo - update to v3.5.2', { name: 'adapt-vimeo', version: '3.5.2', framework: '>=5.19.1' });
 
   testSuccessWhere('flat _globals._vimeo only', {
-    fromPlugins: [{ name: 'adapt-vimeo', version: '@@CURRENT_VERSION' }],
+    fromPlugins: [{ name: 'adapt-vimeo', version: '3.5.1' }],
     content: [
       { _id: 'c-100', _component: 'vimeo' },
       { _type: 'course', _globals: { _vimeo: { skipToTranscript: 'Go to transcript' } } }
@@ -36,7 +36,7 @@ describe('adapt-vimeo - v@@CURRENT_VERSION to v@@RELEASE_VERSION', async () => {
   });
 
   testSuccessWhere('flat and nested _globals._vimeo, flat wins', {
-    fromPlugins: [{ name: 'adapt-vimeo', version: '@@CURRENT_VERSION' }],
+    fromPlugins: [{ name: 'adapt-vimeo', version: '3.5.1' }],
     content: [
       { _id: 'c-100', _component: 'vimeo' },
       {
@@ -50,7 +50,7 @@ describe('adapt-vimeo - v@@CURRENT_VERSION to v@@RELEASE_VERSION', async () => {
   });
 
   testStopWhere('nested _globals._components._vimeo only', {
-    fromPlugins: [{ name: 'adapt-vimeo', version: '@@CURRENT_VERSION' }],
+    fromPlugins: [{ name: 'adapt-vimeo', version: '3.5.1' }],
     content: [
       { _id: 'c-100', _component: 'vimeo' },
       { _type: 'course', _globals: { _components: { _vimeo: { skipToTranscript: 'Skip to transcript' } } } }
@@ -58,7 +58,7 @@ describe('adapt-vimeo - v@@CURRENT_VERSION to v@@RELEASE_VERSION', async () => {
   });
 
   testStopWhere('no _globals', {
-    fromPlugins: [{ name: 'adapt-vimeo', version: '@@CURRENT_VERSION' }],
+    fromPlugins: [{ name: 'adapt-vimeo', version: '3.5.1' }],
     content: [
       { _id: 'c-100', _component: 'vimeo' },
       { _type: 'course' }
@@ -73,6 +73,6 @@ describe('adapt-vimeo - v@@CURRENT_VERSION to v@@RELEASE_VERSION', async () => {
   });
 
   testStopWhere('incorrect version', {
-    fromPlugins: [{ name: 'adapt-vimeo', version: '@@RELEASE_VERSION' }]
+    fromPlugins: [{ name: 'adapt-vimeo', version: '3.5.2' }]
   });
 });
