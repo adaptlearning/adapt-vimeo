@@ -8,12 +8,17 @@ import components from 'core/js/components';
 
 class Vimeo extends ComponentView {
 
-  events() {
-    return {
-      'click .js-vimeo-inline-transcript-toggle': 'onToggleInlineTranscript',
-      'click .js-vimeo-external-transcript-click': 'onExternalTranscriptClicked',
-      'click .js-skip-to-transcript': 'onSkipToTranscript'
-    };
+  preRender() {
+    _.bindAll(this, 'onToggleInlineTranscript', 'onExternalTranscriptClicked', 'onSkipToTranscript');
+
+    const _transcript = this.model.get('_transcript');
+
+    this.model.set({
+      _isInlineTranscriptOpen: false,
+      _hasTranscript: _transcript?._inlineTranscript || _transcript?._externalTranscript,
+      transcriptRegionLabel: _transcript?.inlineTranscriptButton || _transcript?.transcriptLink,
+      inlineButtonText: _transcript?.inlineTranscriptButton || _transcript?.transcriptLink
+    });
   }
 
   postRender() {
@@ -142,31 +147,27 @@ class Vimeo extends ComponentView {
    */
   onToggleInlineTranscript(event) {
     if (event) event.preventDefault();
-    const $transcriptBodyContainer = this.$('.vimeo__transcript-body-inline');
-    const $button = this.$('.vimeo__transcript-btn-inline');
-    const $buttonText = $button.find('.vimeo__transcript-btn-text');
+    const isOpen = this.model.get('_isInlineTranscriptOpen');
+    const _transcript = this.model.get('_transcript');
+    this.model.set({
+      _isInlineTranscriptOpen: !isOpen,
+      inlineButtonText: isOpen
+        ? (_transcript?.inlineTranscriptButton || _transcript?.transcriptLink)
+        : _transcript?.inlineTranscriptCloseButton
+    });
 
-    if ($transcriptBodyContainer.hasClass('inline-transcript-open')) {
-      $transcriptBodyContainer.stop(true, true).slideUp(() => {
-        $(window).resize();
-      }).removeClass('inline-transcript-open');
-      $button.attr('aria-expanded', false);
-      $buttonText.html(this.model.get('_transcript').inlineTranscriptButton);
-      this.transcriptTriggers('closed');
-
-      return;
+    const $transcriptBodyContainer = this.$('.vimeo__transcript-body-inline').stop(true, true);
+    if (isOpen) {
+      $transcriptBodyContainer.slideUp(() => $(window).resize());
+    } else {
+      $transcriptBodyContainer.slideDown(() => $(window).resize());
     }
 
-    $transcriptBodyContainer.stop(true, true).slideDown(() => {
-      $(window).resize();
-    }).addClass('inline-transcript-open');
-
-    $button.attr('aria-expanded', true);
-    $buttonText.html(this.model.get('_transcript').inlineTranscriptCloseButton);
-    this.transcriptTriggers('opened');
+    this.transcriptTriggers(isOpen ? 'closed' : 'opened');
   }
-  
+
   onExternalTranscriptClicked(event) {
+    window.open(this.model.get('_transcript').transcriptLink);
     this.transcriptTriggers('external');
   }
 
@@ -192,6 +193,8 @@ class Vimeo extends ComponentView {
   }
 
 };
+
+Vimeo.template = 'vimeo.jsx';
 
 export default components.register('vimeo', {
   model: ComponentModel.extend({}), // create a new class in the inheritance chain so it can be extended per component type if necessary later
